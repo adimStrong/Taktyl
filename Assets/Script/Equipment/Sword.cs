@@ -29,8 +29,8 @@ public class Sword : MonoBehaviour, IWeapon
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("hit" + other.name);
-            // take the InemyComponent then apply damage
-            other.GetComponent<IEnemy>().TakeDamage(Stats[0].GetCalculatedStatValue());
+            // take the InemyComponent then apply damage for testing purpose I hard coded the value
+            other.GetComponent<IEnemy>().TakeDamage(10);
         }
     }
 

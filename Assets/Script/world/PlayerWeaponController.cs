@@ -11,9 +11,12 @@ public class PlayerWeaponController : MonoBehaviour
 
     CharacterStats characterStats;
 
+    Transform spawnProjectile;
+
     private void Start()
     {
         //getting the character stat class 
+        spawnProjectile = transform.Find("ProjectilePoint");
         characterStats = GetComponent<CharacterStats>();
         animator = GetComponent<Animator>();
     }
@@ -32,10 +35,14 @@ public class PlayerWeaponController : MonoBehaviour
             EquippedWeapon = (GameObject)Instantiate(Resources.Load<GameObject>("Weapons/" + itemToEquip.ObjectSlug),
             playerHand.transform.position, playerHand.transform.rotation);
             activeWeapon = EquippedWeapon.GetComponent<IWeapon>();
-
+            if (EquippedWeapon.GetComponent<IProjectTiles>() != null)
+            {
+                EquippedWeapon.GetComponent<IProjectTiles>().projectilePoint = spawnProjectile;
+            }
             activeWeapon.Stats = itemToEquip.Stats;
             EquippedWeapon.transform.SetParent(playerHand.transform);
             characterStats.AddStatBonus(itemToEquip.Stats);
+            Debug.Log(activeWeapon.Stats[0].GetCalculatedStatValue());
         }
     }
 
