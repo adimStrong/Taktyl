@@ -35,8 +35,10 @@ public class WorldInteractions : MonoBehaviour
     private void Start()
     {
         playerAgent = GetComponent<NavMeshAgent>();
-        animator = this.gameObject.transform.Find("Character").GetComponent<Animator>();
-        animator.SetBool("isPathReach", true);
+   //    animator = this.gameObject.transform.Find("Character").GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        //   animator.SetBool("isPathReach", true);
+       
     }
     private void Update()
     {
@@ -50,7 +52,8 @@ public class WorldInteractions : MonoBehaviour
             Input.GetKeyDown(KeyCode.A) ||
             Input.GetKeyDown(KeyCode.S) ||
             Input.GetKeyDown(KeyCode.D)) {
-            playerAgent.enabled = false;
+           // playerAgent.enabled = false;
+           // for keyboard/ analog control sana but 2 days na and i haven't finish this function yet time to move on to plan B
            
         }
         else
@@ -86,8 +89,8 @@ public class WorldInteractions : MonoBehaviour
 
 
                 pathReached = true;
-                animator.SetBool("isPathReach", pathReached);
-     
+                //animator.SetBool("isPathReach", pathReached);
+                animator.SetFloat("Speed", 0f);
             }
         }
 
@@ -117,8 +120,8 @@ public class WorldInteractions : MonoBehaviour
             {
                
                 pathReached = true;
-                animator.SetBool("isPathReach", pathReached);
-             
+             //   animator.SetBool("isPathReach", pathReached);
+                animator.SetFloat("Speed", 0f);
                 playerAgent.destination = playerAgent.transform.position;
             }
             else
@@ -130,7 +133,8 @@ public class WorldInteractions : MonoBehaviour
                
                 pathReached = false;
                 animator.SetTrigger("isRunning");
-                animator.SetBool("isPathReach", pathReached);
+            //    animator.SetBool("isPathReach", pathReached);
+                animator.SetFloat("Speed", 3f);
                 moveFSM = MoveFSM.move;
 
             }

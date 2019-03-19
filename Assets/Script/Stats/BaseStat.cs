@@ -40,13 +40,13 @@ public class BaseStat : MonoBehaviour
 
     public void RemovingStatBonus(StatBonus statBonus)
     {
-        this.baseStatBonus.Remove(statBonus);
+        this.baseStatBonus.Remove(baseStatBonus.Find(x => x.BonusValue == statBonus.BonusValue));
     }
 
     public int GetCalculatedStatValue()
     {
         // we will take the final value and take the added bonus value to get the total value
-
+        this.FinalValue = 0;
         this.baseStatBonus.ForEach(x =>this.FinalValue += x.BonusValue);
         // then we will add the base stat
         FinalValue += BaseValue;
