@@ -31,14 +31,17 @@ public class PlayerWeaponController : MonoBehaviour
         }
         else
         {
+
             // find the weapon object from the resources folder and parent it to the playerhand gameobject
             EquippedWeapon = (GameObject)Instantiate(Resources.Load<GameObject>("Weapons/" + itemToEquip.ObjectSlug),
-            playerHand.transform.position, playerHand.transform.rotation);
+                playerHand.transform.position, playerHand.transform.rotation);
+
+            Debug.Log("Created an item");
+
             activeWeapon = EquippedWeapon.GetComponent<IWeapon>();
             if (EquippedWeapon.GetComponent<IProjectTiles>() != null)
-            {
                 EquippedWeapon.GetComponent<IProjectTiles>().projectilePoint = spawnProjectile;
-            }
+                
             activeWeapon.Stats = itemToEquip.Stats;
             EquippedWeapon.transform.SetParent(playerHand.transform);
             characterStats.AddStatBonus(itemToEquip.Stats);
@@ -62,3 +65,4 @@ public class PlayerWeaponController : MonoBehaviour
 
 
 }
+    
